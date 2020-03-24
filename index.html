@@ -5,7 +5,8 @@
     </head>
     <body>
         <form id="form">
-            Image URL: <input type="text" />
+            Image URL: <input type="text" /> <br>
+            Opacity: <input value="0.65" type="text" /> <br>
             <input type="submit" />
         </form>
         
@@ -40,6 +41,7 @@
                 // https://www.youtube.com/watch?v=ABCDEFGHIJK
                 // https://youtu.be/ABCDEFGHIJK
                 let url = new URL(event.target.children[0].value)
+                let opacity = event.target.children[2].value || 0.65
                 let vidId = (url.hostname === 'youtu.be') ? (url.pathname.substring(1)) : (url.searchParams.get('v'))
                 let thumb = await loadImage(`https://img.youtube.com/vi/${vidId}/maxresdefault.jpg`)
                 let overlay = await loadImage(overlayUrl)
@@ -52,7 +54,7 @@
 
                 // let m = ctx.globalCompositeOperation
                 // ctx.globalCompositeOperation = 'overlay'
-                ctx.fillStyle = 'rgba(0,0,0,0.65)'
+                ctx.fillStyle = `rgba(0,0,0,${opacity})`
                 ctx.fillRect(0, 0, canvas.width, canvas.height)
                 //ctx.globalCompositeOperation = m
                 ctx.globalAlpha = 1.0
